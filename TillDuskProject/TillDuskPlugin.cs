@@ -74,7 +74,7 @@ public class TillDuskPlugin : BaseSpaceWarpPlugin
     {
         if (_sunriseWarpIndex.Value > 6)
         {
-            _timePadding.Value = 500;
+            _timePadding.Value = 600;
         }
     }
 
@@ -90,7 +90,7 @@ public class TillDuskPlugin : BaseSpaceWarpPlugin
                 _windowRect,
                 FillWindow,
                 "Till Dusk",
-                GUILayout.Height(100),
+                GUILayout.Height(125),
                 GUILayout.Width(400)
             );
         }
@@ -140,6 +140,7 @@ public class TillDuskPlugin : BaseSpaceWarpPlugin
         var testInt1 = 0;
         
         GUILayout.Label("The next sunrise at: " + UT2String(nextSunrise));
+        GUILayout.Label("In: " + UT2String(Math.Round(nextSunrise - UT, _utRounding.Value)));
         if (GUILayout.Button("Warp to next sunrise"))
         {
             if (timeManager == null)

@@ -4,7 +4,7 @@
   "name": "Till Dusk",
   "description": "A mod that adds an app.bar that allows you to warp quickly to sunrise.",
   "source": "https://github.com/Rexicon226/TillDusk",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "version_check": "",
   "dependencies": [
     {
