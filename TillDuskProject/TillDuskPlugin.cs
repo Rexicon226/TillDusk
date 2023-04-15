@@ -79,7 +79,7 @@ public class TillDuskPlugin : BaseSpaceWarpPlugin
                 _windowRect,
                 FillWindow,
                 "Till Dusk",
-                GUILayout.Height(250),
+                GUILayout.Height(150),
                 GUILayout.Width(350)
             );
         }
