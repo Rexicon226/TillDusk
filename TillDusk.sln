@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{71A6A5C1-11AE-4AAD-A182-46CF083D7CAB}") = "TillDusk", "TillDuskProject\TillDusk.csproj", "{43B26908-6005-44EB-94D8-A6D3DEB8C083}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43B26908-6005-44EB-94D8-A6D3DEB8C083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43B26908-6005-44EB-94D8-A6D3DEB8C083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43B26908-6005-44EB-94D8-A6D3DEB8C083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43B26908-6005-44EB-94D8-A6D3DEB8C083}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

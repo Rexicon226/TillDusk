@@ -1,0 +1,11 @@
+C:\Users\david\Documents\KSPMods\TillDusk\TillDuskProject\bin\Debug\netstandard2.0\com.github.sinon.till_dusk.deps.json
+C:\Users\david\Documents\KSPMods\TillDusk\TillDuskProject\bin\Debug\netstandard2.0\com.github.sinon.till_dusk.dll
+C:\Users\david\Documents\KSPMods\TillDusk\TillDuskProject\bin\Debug\netstandard2.0\com.github.sinon.till_dusk.pdb
+C:\Users\david\Documents\KSPMods\TillDusk\TillDuskProject\obj\Debug\netstandard2.0\TillDusk.csproj.AssemblyReference.cache
+C:\Users\david\Documents\KSPMods\TillDusk\TillDuskProject\obj\Debug\netstandard2.0\MyPluginInfo.cs
+C:\Users\david\Documents\KSPMods\TillDusk\TillDuskProject\obj\Debug\netstandard2.0\TillDusk.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\david\Documents\KSPMods\TillDusk\TillDuskProject\obj\Debug\netstandard2.0\TillDusk.AssemblyInfoInputs.cache
+C:\Users\david\Documents\KSPMods\TillDusk\TillDuskProject\obj\Debug\netstandard2.0\TillDusk.AssemblyInfo.cs
+C:\Users\david\Documents\KSPMods\TillDusk\TillDuskProject\obj\Debug\netstandard2.0\TillDusk.csproj.CoreCompileInputs.cache
+C:\Users\david\Documents\KSPMods\TillDusk\TillDuskProject\obj\Debug\netstandard2.0\com.github.sinon.till_dusk.dll
+C:\Users\david\Documents\KSPMods\TillDusk\TillDuskProject\obj\Debug\netstandard2.0\com.github.sinon.till_dusk.pdb
