@@ -2,8 +2,6 @@ name: Verify KSP2 Mod
 
 on:
   push:
-    branches:
-      - main
 
 jobs:
   verify:
