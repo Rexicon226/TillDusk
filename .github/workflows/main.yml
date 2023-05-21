@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: KSP2 Space Warp Verifier
-        uses: Rexicon226/VerifierAction@v0.1
+        uses: Rexicon226/VerifierAction@V0.1
