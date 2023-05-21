@@ -1,4 +1,5 @@
 import json
+import requests
 import os
 
 PATH = '/home/runner/work/'
@@ -17,9 +18,14 @@ for root, subFolder, files in os.walk(PATH):
                 raise ResolutionError("You have more than 1 'swinfo.info' file in your project, please resolve this")
             swinfo_path = os.path.join(root, item)
 
-swinfo_file = open(swinfo_path)          
+swinfo_file = open(swinfo_path)   
+
 contents = json.load(swinfo_file)
+
 swinfo_file.close()
 
-print(contents.get("version_check"))
+check_url = contents.get("version_check")
 
+return_code = requests.get(check_url).status_code
+
+print(return_code)
