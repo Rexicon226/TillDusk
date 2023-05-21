@@ -15,5 +15,5 @@ jobs:
         python-version: '3.9'
         architecture: 'x64'
     - run: mkdir .github/scripts
-    - run: curl "https://raw.githubusercontent.com/Rexicon226/VerifierAction/main/.github/scripts/verify_check.py" -O ".github/scripts/"
+    - run: curl -o ".github/scripts/" "https://raw.githubusercontent.com/Rexicon226/VerifierAction/main/.github/scripts/verify_check.py" 
     - run: python3 -m pip install requests && python3 .github/scripts/verify_check.py
