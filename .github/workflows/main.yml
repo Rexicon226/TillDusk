@@ -1,2 +1,17 @@
-- name: KSP2 Space Warp Verifier
-  uses: Rexicon226/VerifierAction@V0.1
+name: Verify KSP2 Mod
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: KSP2 Space Warp Verifier
+        uses: Rexicon226/VerifierAction@v0.1
