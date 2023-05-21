@@ -13,5 +13,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: KSP2 Space Warp Verifier
+      - name: Verify KSP2 Mod
         uses: Rexicon226/VerifierAction@V0.2
+
