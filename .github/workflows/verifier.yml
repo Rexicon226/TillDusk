@@ -1,0 +1,11 @@
+run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+
+on:
+  push:
+  workflow_dispatch:
+    
+jobs:
+  verify_check:
+    runs-on: ubuntu-latest
+    
+    
