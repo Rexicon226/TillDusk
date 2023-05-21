@@ -21,6 +21,5 @@ swinfo_file = open(swinfo_path)
 contents = json.load(swinfo_file)
 swinfo_file.close()
 
-for i in contents:
-    print(i)
+print(contents.get("version_check"))
 
