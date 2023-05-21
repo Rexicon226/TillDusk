@@ -1,0 +1,2 @@
+- name: KSP2 Space Warp Verifier
+  uses: Rexicon226/VerifierAction@V0.1
