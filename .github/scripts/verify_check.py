@@ -17,6 +17,11 @@ for root, subFolder, files in os.walk(PATH):
                 raise ResolutionError("You have more than 1 'swinfo.info' file in your project, please resolve this")
             swinfo_path = os.path.join(root, item)
 
-print(swinfo_path)
-    
-            
+swinfo_file = open(swinfo_oath)          
+
+contents = json.load(swinfo_file)
+
+for i in contents:
+    print(i)
+
+swinfo_file.close()
