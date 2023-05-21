@@ -15,6 +15,6 @@ for root, subFolder, files in os.walk(PATH):
             swinfo_amount += 1
             if swinfo_amount > 1:
                 raise ResolutionError("You have more than 1 'swinfo.info' file in your project, please resolve this")
-            swinfo_path = os.path.join(root, subFolder)
+            print(item, files, subFolder, root)
     
             
