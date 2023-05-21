@@ -38,6 +38,6 @@ swinfo_file.close()
 check_url = contents.get("version_check")
 
 return_code = requests.get(check_url).status_code
-
+print(type(return_code))
 if (return_code != '200'):
     raise ReturnCodeError("The 'version_check' you have put into your swinfo.json is incorrect / invalid. Please make sure there are no typos and it is a valid link to a swinfo.json or .csproj")
