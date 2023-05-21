@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Verify KSP2 Mod
-        uses: Rexicon226/VerifierAction@V0.2
+        uses: Rexicon226/VerifierAction@V0.3
