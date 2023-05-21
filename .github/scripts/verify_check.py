@@ -26,7 +26,7 @@ for root, subFolder, files in os.walk(PATH):
         if item == "swinfo.json" :
             swinfo_amount += 1
             if swinfo_amount > 1:
-                raise ResolutionError("You have more than 1 'swinfo.info' file in your project, please resolve this")
+                raise ResolutionError("You have more than 1 'swinfo.json' file in your project, please resolve this")
             swinfo_path = os.path.join(root, item)
 
 swinfo_file = open(swinfo_path)   
