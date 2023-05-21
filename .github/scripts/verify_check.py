@@ -1,3 +1,11 @@
+"""
+==========================================
+Author: Rexicon226 <87927264+Rexicon226@users.noreply.github.com>
+Co-authored-by: Mineinjava <65673396+Mineinjava@users.noreply.github.com>
+Date:   20 May 2023
+==========================================
+"""
+
 import json
 import requests
 import os
@@ -8,6 +16,9 @@ swinfo_amount = 0
 swinfo_path = ""
 
 class ResolutionError(Exception):
+    pass
+
+class ReturnCodeError(Exception):
     pass
 
 for root, subFolder, files in os.walk(PATH):
@@ -28,4 +39,5 @@ check_url = contents.get("version_check")
 
 return_code = requests.get(check_url).status_code
 
-print(return_code)
+if (return_code != '200'):
+    raise ReturnCodeError("The 'version_check' you have put into your swinfo.json is incorrect / invalid. Please make sure there are no typos and it is a valid link to a swinfo.json or .csproj")
