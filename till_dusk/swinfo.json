@@ -5,7 +5,7 @@
   "description": "A mod that adds an app.bar that allows you to warp quickly to sunrise.",
   "source": "https://github.com/Rexicon226/TillDusk",
   "version": "0.1.2",
-  "version_check": "https://raw.githubusercontent.com/Rexicon226/TillDusk/main/tll_dusk/swinfo.json",
+  "version_check": "https://raw.githubusercontent.com/Rexicon226/TillDusk/main/till_dusk/swinfo.json",
   "dependencies": [
     {
       "id":  "SpaceWarp",
