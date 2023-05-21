@@ -1,4 +1,4 @@
-name: Verify KSP2 Mod
+name: Space Warp Version Checker
 
 on:
   push:
