@@ -1,4 +1,5 @@
-﻿using BepInEx;
+﻿using System.Globalization;
+using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
 using KSP.Game;
@@ -25,24 +26,20 @@ public class TillDuskPlugin : BaseSpaceWarpPlugin
     private static ConfigEntry<int>  _utRounding;
     private static ConfigEntry<int> _timePadding;
     private static ConfigEntry<int> _sunriseWarpIndex;
-
-    private static bool isEdgeWarping;
-    private static int dayStartedWarp;
+    
+    private static bool _isEdgeWarping;
+    private static int _dayStartedWarp;
 
     private static bool _isWindowOpen;
     private static Rect _windowRect;
 
     private const string ToolbarFlightButtonID = "BTN-TillDuskFlight";
-    private const string ToolbarOABButtonID = "BTN-TillDuskOAB";
+    private const string ToolbarOabButtonID = "BTN-TillDuskOAB";
 
-    public static TillDuskPlugin Instance { get; set; }
-    
     public override void OnInitialized()
     {
         base.OnInitialized();
 
-        Instance = this;
-        
         Appbar.RegisterAppButton(
             "Till Dusk",
             ToolbarFlightButtonID,
@@ -66,15 +63,17 @@ public class TillDuskPlugin : BaseSpaceWarpPlugin
             new ConfigDescription(
                 "How fast the warp to sunrise should be. 1-10",
                 new AcceptableValueRange<int>(1, 7)
-            )
-            );
+            ));
     }
     
     private void Update()
     {
-        if (_sunriseWarpIndex.Value > 6)
+        if (_sunriseWarpIndex != null)
         {
-            _timePadding.Value = 600;
+            if (_sunriseWarpIndex.Value > 6)
+            {
+                _timePadding.Value = 600;
+            }
         }
     }
 
@@ -102,21 +101,17 @@ public class TillDuskPlugin : BaseSpaceWarpPlugin
         GameObject.Find(ToolbarFlightButtonID)?.GetComponent<UIValue_WriteBool_Toggle>()?.SetValue(false);
     }
 
-    private static String UT2String(double UT)
+    private static String Ut2String(double ut)
     {
-        var secondsToMinutes = 60;
-        var minutesToHours = 60;
-        var hoursToDays = 6;
-        
-        var days = Math.Floor(UT / 21600);
-        var hours = Math.Floor((UT % 21600) / 3600);
-        var minutes = Math.Floor(((UT % 21600) % 3600) / 60);
-        var secondsLeft = Math.Floor(((UT % 21600) % 3600) % 60);
+        var days = Math.Floor(ut / 21600);
+        var hours = Math.Floor((ut % 21600) / 3600);
+        var minutes = Math.Floor(((ut % 21600) % 3600) / 60);
+        var secondsLeft = Math.Floor(((ut % 21600) % 3600) % 60);
 
-        var dayString = days.ToString();
-        var hourString = hours.ToString();
-        var minuteString = minutes.ToString();
-        var secondString = secondsLeft.ToString();
+        var dayString = days.ToString(CultureInfo.CurrentCulture);
+        var hourString = hours.ToString(CultureInfo.CurrentCulture);
+        var minuteString = minutes.ToString(CultureInfo.CurrentCulture);
+        var secondString = secondsLeft.ToString(CultureInfo.CurrentCulture);
         
         return $"{dayString}d {hourString}h {minuteString}m {secondString}s";
     }
@@ -124,30 +119,29 @@ public class TillDuskPlugin : BaseSpaceWarpPlugin
 
     private static void FillWindow(int windowID)
     {
-        double UT = GameManager.Instance.Game.UniverseModel.UniversalTime;
-        GUILayout.Label("The current in-game time is: " + UT2String(Math.Round(UT, _utRounding.Value)));
+        double ut = GameManager.Instance.Game.UniverseModel.UniversalTime;
+        GUILayout.Label("The current in-game time is: " + Ut2String(Math.Round(ut, _utRounding.Value)));
         
-        var dayCount = Math.Floor(Math.Round(UT, 0) / 21600);
+        var dayCount = Math.Floor(Math.Round(ut, 0) / 21600);
 
         var nextSunrise = dayCount * 21600 + _bestSunriseTime.Value;
         
-        if (nextSunrise - UT < 0)
+        if (nextSunrise - ut < 0)
         {
             nextSunrise = (dayCount + 1) * 21600 + _bestSunriseTime.Value;
         }
         
         var timeManager = GameManager.Instance.Game.ViewController?.TimeWarp;
-        var testInt1 = 0;
-        
-        GUILayout.Label("The next sunrise at: " + UT2String(nextSunrise));
-        GUILayout.Label("In: " + UT2String(Math.Round(nextSunrise - UT, _utRounding.Value)));
+
+        GUILayout.Label("The next sunrise at: " + Ut2String(nextSunrise));
+        GUILayout.Label("In: " + Ut2String(Math.Round(nextSunrise - ut, _utRounding.Value)));
         if (GUILayout.Button("Warp to next sunrise"))
         {
             if (timeManager == null)
             {
                 return;
             }
-            if (!isEdgeWarping)
+            if (!_isEdgeWarping)
             {
                 for (int i = 0; i < _sunriseWarpIndex.Value; i++)
                 {
@@ -156,14 +150,14 @@ public class TillDuskPlugin : BaseSpaceWarpPlugin
                         timeManager.IncreaseTimeWarp();
                     }
                 }
-                dayStartedWarp = (int) dayCount;
-                isEdgeWarping = true;
+                _dayStartedWarp = (int) dayCount;
+                _isEdgeWarping = true;
             }
         }
         
-        if (dayStartedWarp + 2 == (int) dayCount)
+        if (_dayStartedWarp + 2 == (int) dayCount)
         {
-            isEdgeWarping = false;
+            _isEdgeWarping = false;
             for (int i = 0; i < _sunriseWarpIndex.Value; i++)
             {
                 if (timeManager?._currentRate < _sunriseWarpIndex.Value)
@@ -172,26 +166,26 @@ public class TillDuskPlugin : BaseSpaceWarpPlugin
                 }
             }
 
-            dayStartedWarp = -1;
+            _dayStartedWarp = -1;
             timeManager?.StopTimeWarp();
         }
 
-        if (isEdgeWarping)
+        if (_isEdgeWarping)
         {
                     
             if (GUILayout.Button("Stop Warping"))
             {
                 timeManager?.StopTimeWarp();
-                isEdgeWarping = false;
+                _isEdgeWarping = false;
             }
             
             GUILayout.Label("Warping to next sunrise...");
-            GUILayout.Label(nextSunrise - _timePadding.Value + " > " + Math.Round(UT, _utRounding.Value));
-            if (UT > nextSunrise - _timePadding.Value)
+            GUILayout.Label(nextSunrise - _timePadding.Value + " > " + Math.Round(ut, _utRounding.Value));
+            if (ut > nextSunrise - _timePadding.Value)
             {
                 GUILayout.Label("Warping to next sunrise... Done!");
                 timeManager?.StopTimeWarp();
-                isEdgeWarping = false;
+                _isEdgeWarping = false;
             }
         }
         if (GUI.Button(new Rect(_windowRect.width - 18, 2, 16, 16), "x"))
