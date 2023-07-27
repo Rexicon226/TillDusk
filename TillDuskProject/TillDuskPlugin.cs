@@ -7,9 +7,12 @@ using KSP.UI.Binding;
 using SpaceWarp;
 using SpaceWarp.API.Assets;
 using SpaceWarp.API.Mods;
-using SpaceWarp.API.UI;
 using SpaceWarp.API.UI.Appbar;
+using SpaceWarp.API.UI;
+using SpaceWarp.Backend.UI.Loading;
 using UnityEngine;
+using JetBrains.Annotations;
+using SpaceWarp.API.Loading;
 
 namespace TillDusk;
 
@@ -18,9 +21,9 @@ namespace TillDusk;
 public class TillDuskPlugin : BaseSpaceWarpPlugin
 {
     // These are useful in case some other mod wants to add a dependency to this one
-    public const string ModGuid = MyPluginInfo.PLUGIN_GUID;
-    public const string ModName = MyPluginInfo.PLUGIN_NAME;
-    public const string ModVer = MyPluginInfo.PLUGIN_VERSION;
+    [PublicAPI] public const string ModGuid = MyPluginInfo.PLUGIN_GUID;
+    [PublicAPI] public const string ModName = MyPluginInfo.PLUGIN_NAME;
+    [PublicAPI] public const string ModVer = MyPluginInfo.PLUGIN_VERSION;
     
     private static ConfigEntry<int> _bestSunriseTime;
     private static ConfigEntry<int>  _utRounding;
@@ -34,7 +37,6 @@ public class TillDuskPlugin : BaseSpaceWarpPlugin
     private static Rect _windowRect;
 
     private const string ToolbarFlightButtonID = "BTN-TillDuskFlight";
-    private const string ToolbarOabButtonID = "BTN-TillDuskOAB";
 
     public override void OnInitialized()
     {
@@ -50,7 +52,7 @@ public class TillDuskPlugin : BaseSpaceWarpPlugin
                 GameObject.Find(ToolbarFlightButtonID)?.GetComponent<UIValue_WriteBool_Toggle>()?.SetValue(isOpen);
             }
         );
-        
+
         Harmony.CreateAndPatchAll(typeof(TillDuskPlugin).Assembly);
         
         _bestSunriseTime = Config.Bind("Settings section", "Sunrise Time", 15420, "The time into the day at which the best sunrise will occur. (In seconds)");
@@ -63,20 +65,17 @@ public class TillDuskPlugin : BaseSpaceWarpPlugin
             new ConfigDescription(
                 "How fast the warp to sunrise should be. 1-10",
                 new AcceptableValueRange<int>(1, 7)
-            ));
+        ));
     }
     
     private void Update()
     {
-        if (_sunriseWarpIndex != null)
+        if (_sunriseWarpIndex is { Value: > 6 })
         {
-            if (_sunriseWarpIndex.Value > 6)
-            {
-                _timePadding.Value = 600;
-            }
+            _timePadding.Value = 600;
         }
     }
-
+    
     private void OnGUI()
     {
         // Set the UI

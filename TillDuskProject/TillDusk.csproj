@@ -16,14 +16,27 @@
         <ModId Condition="'$(ModId)'==''">till_dusk</ModId>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="Assembly-CSharp">
-            <HintPath>..\external_dlls\Assembly-CSharp.dll</HintPath>
-            <Publicize>true</Publicize>
-            <Private>false</Private>
+        <Reference Include="SpaceWarp">
+            <HintPath>$(ProjectDir)..\spacewarp_dlls\SpaceWarp.dll</HintPath>
+        </Reference>
+        <Reference Include="SpaceWarp.UI">
+            <HintPath>$(ProjectDir)..\spacewarp_dlls\SpaceWarp.UI.dll</HintPath>
+        </Reference>
+        <Reference Include="SpaceWarp.Sound">
+            <HintPath>$(ProjectDir)..\spacewarp_dlls\SpaceWarp.Sound.dll</HintPath>
+        </Reference>
+        <Reference Include="SpaceWarp.Game">
+            <HintPath>$(ProjectDir)..\spacewarp_dlls\SpaceWarp.Game.dll</HintPath>
+        </Reference>
+        <Reference Include="SpaceWarp.VersionChecking">
+            <HintPath>$(ProjectDir)..\spacewarp_dlls\SpaceWarp.VersionChecking.dll</HintPath>
+        </Reference>
+        <Reference Include="SpaceWarp.Core">
+            <HintPath>$(ProjectDir)..\spacewarp_dlls\SpaceWarp.Core.dll</HintPath>
         </Reference>
     </ItemGroup>
+    
     <ItemGroup>
-        <PackageReference Include="SpaceWarp" Version="1.3.1" />   
         <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.1" PrivateAssets="all" />
         <PackageReference Include="BepInEx.BaseLib" Version="5.4.21" Publicize="true" />
         <PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0" PrivateAssets="all" />
